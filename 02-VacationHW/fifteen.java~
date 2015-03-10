@@ -2,38 +2,17 @@ import java.io.*;
 import java.util.*;
 
 public class fifteen {
-
     private int[][] board;
     private Random rng;
     private ArrayList<Integer> list; // TO ASSIGN NUMBERS TO THE BOARD
     private int wall = -1; // PADDING
     private int startR, startC; // COORDINATES OF 00 (THE START)
-
-    public void delay(int n) {
-	try {
-	    Thread.sleep(n);
-	} catch (Exception e) {}
-    }
     
     public fifteen() {
-	board = new int[4][4];
+	board = new int[8][8];
 	startR = -1;
 	startC = -1;
-	
-	int i=1;
-        for(int r=0;r<board.length;r++) {
-	    for(int c=0;c<board[r].length;c++) {
-		if( 1 > 15) {
-		    board[r][c] = 0;
-		}
-		else {
-		    board[r][c] = i;
-		}
-		i++;
-	    }
-	}
 
-	/* -- MAKE A SCRAMBLED BOARD
 	rng = new Random();
 	list = new ArrayList<Integer>();
 	for(int i=0;i<16;i++) {
@@ -54,25 +33,7 @@ public class fifteen {
 		}
 	    }
 	}
-	*/
     }
-
-    /* --- SCRAMBLE THE BOARD --- */
-    /*
-    public void Scramble(int r, int c) {
-	
-	for(int i=0; i<20;i++) {
-	    try {
-		board[r][c] = me;
-		board[r][c] = board[r][c+1];
-		board[r][c+1] = me;
-		
-		board[
-	    } catch (Exception e) { }
-	}
-    }
-	
-	*/
 
     public String toString() {
 	String s = "";
@@ -92,16 +53,16 @@ public class fifteen {
 
     /* --- IS SOLVED? --- */
     public boolean solved() {
-	//boolean solved = true;
-	int i = 1;
-	for (int r = 0; r < board.length; r++) {
-	    for (int c = 0; c < board.length; c++) {
-		if(board[r][c] != i) {
-		    //solved = false;
+	boolean solved = false;
+	int i = 0;
+	for(int r=2;r<board.length-2;r++) {
+	    for(int c=2;c<board.length-2;c++) {
+		if(board[r][c] == i) {
+		    solved = true;
 		    i++;
 		}
-		else if(board[3][3] != 0) {
-		    // solved = false;
+		else if(board[3][3] == 0) {
+		    solved = true;
 		    i++;
 		}
 		else {
@@ -109,7 +70,7 @@ public class fifteen {
 		}
 	    }
 	}
-	return true;
+	return solved;
     }
 
     /* --- RECURSIVE SOLVER --- */
@@ -121,39 +82,27 @@ public class fifteen {
 	   board[r-1][c] == wall) {
 	    return;
 	}
-        else if(solved()) {
+        if(solved()) {
 	    System.out.println(toString());
 	}
         else {
 	    int me = board[r][c];
-	    try {
-		for(int i=0;i < 4; i++) {
-		    switch(i) {
-		    case 1:
-			board[r][c] = board[r][c+1];
-			board[r][c+1] = me;
-			toSolve(r, c+1);
-			break;
-		    case 2:
-			board[r][c] = board[r][c-1];
-			board[r][c-1] = me;
-			toSolve(r, c-1);
-			break;
-		    case 3:
-			board[r][c] = board[r+1][c];
-			board[r+1][c] = me;
-			toSolve(r+1, c);
-			break;
-		    case 4:
-			board[r][c] = board[r-1][c];
-			board[r-1][c] = me;
-			toSolve(r-1, c);
-			break;
-		    default:
-			break;
-		    }
-		}
-	    } catch (Exception e) {}
+
+	    board[r][c] = board[r][c+1];
+	    board[r][c+1] = me;
+	    toSolve(r, c+1);
+	    
+	    board[r][c] = board[r][c-1];
+	    board[r][c-1] = me;
+	    toSolve(r, c-1);
+	    
+	    board[r][c] = board[r+1][c];
+	    board[r+1][c] = me;
+	    toSolve(r+1, c);
+
+	    board[r][c] = board[r-1][c];
+	    board[r-1][c] = me;
+	    toSolve(r-1, c);
 	}
     }
 
