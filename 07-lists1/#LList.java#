@@ -1,5 +1,11 @@
 public class LList {
-    private Node l=null;
+    private Node l;
+    private int len;
+
+    public LList() {
+	l = new Node();
+	len = 0;
+    }
 
     public String toString() {
 	String s = "";
@@ -12,6 +18,8 @@ public class LList {
     }
 
     // Adds a node to the beginning of the list
+    public boolean add(
+    
     public void add(String s) {
         Node tmp = new Node(s);
 	tmp.setNext(l);

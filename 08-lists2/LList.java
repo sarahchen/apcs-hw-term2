@@ -1,5 +1,12 @@
 public class LList {
-    private Node l=null;
+    private Node start, l;
+    private int len;
+
+    public LList() {
+        start = new Node();
+	l = null;
+	len = 0;
+    }
 
     public String toString() {
 	String s = "";
@@ -11,11 +18,9 @@ public class LList {
 	return s;
     }
 
-    // Adds a node to the beginning of the list
-    public void add(String s) {
-        Node tmp = new Node(s);
-	tmp.setNext(l);
-	l = tmp;
+    // Adds a node to the end of the list
+    public boolean add(Node e) {
+        
     }
 
     // returns the data of the Node at index n
