@@ -1,56 +1,63 @@
 public class LList {
-    private Node start, l;
+    private Node l;
     private int len;
 
     public LList() {
-        start = new Node();
-	l = null;
+        l = new Node();
 	len = 0;
     }
 
     public String toString() {
+	int i = 0;
 	String s = "";
-	Node tmp;
-	for(tmp = l;tmp != null; tmp=tmp.getNext()) {
-	    s = s + tmp + " ---> ";
-	}
-	s = s + "null";
-	return s;
+	
     }
 
     // Adds a node to the end of the list
-    public boolean add(Node e) {
-        
+    public boolean add(int s) {
+        Node choco = new Node(s);
+        choco.setNext(getNode(0));
+	l.setNext(choco);
+	len = len + 1;
+	return true;
     }
 
-    // returns the data of the Node at index n
-    public String find(int n) {
-        Node lychee = l;
-	for(int i=0;i<n;i++) {
-	    lychee = lychee.getNext();
-	}
-	return lychee.getData();
+    public void add(int i, int s) {
+	Node jelly = new Node(s);
+	jelly.setNext(getNode(i+1));
+	getNode(i).setNext(jelly);
+	len = len + 1;
     }
 
-    // returns the Node at index n
-    public Node findN(int n) {
-	Node dragon = l;
-	for(int i=0;i<n;i++) {
-	    dragon = dragon.getNext();
+    public int get(int n) {
+	Node tofu = l.getNext();
+	try {
+	    for(int i=0; i<n; i++) {
+		tofu = tofu.getNext();
+	    }
+	} catch (Exception e) {
+	    return l.getData();
 	}
-	return dragon;
+	return tofu.getData();
     }
 
-    // inserts new node at index n
-    public void insert(int n, String s) {
-	if(n ==  0) {
-	    add(new Node(s));
+    public int remove(int n) {
+	getNode(n-1).setNext(getNode(n+1));
+	len = len - 1;
+	return get(n);
+    }
+
+    // helper function
+    public Node getNode(int n) {
+	Node mochi = l.getNext();
+	try {
+	    for(int i=0; i<n; i++) {
+		mochi = mochi.getNext();
+	    }
+	} catch (Exception e) {
+	    return l;
 	}
-	else {
-	    Node star = new Node(s);
-	    star.setNext(findN(n));
-	    findN(n-1).setNext(star);
-	}
+	return mochi;
     }
 
 }
