@@ -2,6 +2,8 @@ public class Node<E> {
     private E data;
     private Node<E> next = null;
 
+    public Node() {
+    }
     public Node(E data) {
 	this.data = data;
     }
