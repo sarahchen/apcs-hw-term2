@@ -1,7 +1,7 @@
 
 public class Queue<E> {
-    private Node<E> first;
-    private Node<E> last;
+    private Node<E> first; // Dummy Node (Stays in beginning)
+    private Node<E> last; // Keeps track of last Node
 
     public Queue() {
 	first = new Node<E>();

@@ -1,3 +1,5 @@
+import java.util.*;
+import java.io.*;
 
 public class QueueArray {
     private int[] array;
@@ -9,11 +11,14 @@ public class QueueArray {
     }
 
     public void newArray(int type) {
+	int[] tmp;
 	if(type == 0) {
-	    int[] tmp = new int[array.length + 100];
-	    tmp = Arrays.copyOfRange(array, 0, array.length);
+	    tmp = new int[array.length + 100];
+	    for(int i=0;i<array.length;i++) {
+		tmp[i] = array[i];
+	    }
 	} else {
-	    int[] tmp = Arrays.copyOfRange(array, 0, array.length);
+	    tmp = Arrays.copyOfRange(array, 0, array.length);
 	}
 	array = tmp;
     }
@@ -24,15 +29,14 @@ public class QueueArray {
 	    last++;
 	}
 	catch (Exception e) {
-	    newArray();
+	    newArray(0);
 	    enqueue(data);
 	}
     }
 
     public int dequeue() {
         int answer = array[0];
-	array[0] = null;
-	newArray();
+	newArray(1);
 	return answer;
     }
 }
