@@ -1,30 +1,46 @@
-public class Node<E> {
-    private E data;
-    private Node<E> next = null;
+public class Node {
+    private char data;
+    private Node next = null;
+    private int X;
+    private int Y;
 
     public Node() {
     }
-    public Node(E data) {
+    public Node(char data) {
 	this.data = data;
     }
-    public Node(E data, Node<E> next) {
+    public Node(char data, Node next) {
 	this.data = data;
 	this.next = next;
     }
 
-    public E getData(){
+    public char getData(){
 	return data;
     }
 
-    public void setData(E data) {
+    public void setData(char data) {
 	this.data = data;
     }
 
-    public Node<E> getNext() {
+    public Node getNext() {
 	return next;
     }
 
-    public void setNext(Node<E> n) {
+    public void setNext(Node n) {
 	next = n;
+    }
+
+    public void setX(int X) {
+        this.X = X;
+    }
+    public int getX() {
+	return X;
+    }
+
+    public void setY(int Y) {
+	this.Y = Y;
+    }
+    public int getY() {
+	return Y;
     }
 }

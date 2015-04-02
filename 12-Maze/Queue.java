@@ -1,23 +1,22 @@
 
-public class Queue<E> {
-    private Node<E> first; // Dummy Node (Stays in beginning)
-    private Node<E> last; // Keeps track of last Node
+public class Queue {
+    private Node first; // Dummy Node (Stays in beginning)
+    private Node last; // Keeps track of last Node
 
     public Queue() {
-	first = new Node<E>();
+	first = new Node();
 	last = first;
     }
 
-    public void enqueue(E data) {
-	Node<E> n = new Node<E>(data);
+    public void enqueue(Node n) {
 	last.setNext(n);
 	last = n;
     }
 
-    public E dequeue() {
-	Node<E> tmp = first.getNext();
+    public Node dequeue() {
+	Node tmp = first.getNext();
 	first.setNext(first.getNext().getNext());
-	return tmp.getData();
+	return tmp;
     }
 
     public String toString() {
@@ -31,6 +30,7 @@ public class Queue<E> {
 	return s;
     }
 
+    /* FOR TESTING
     public static void main(String[] args) {
 	Queue<Integer> q = new Queue<Integer>();
 	for(int i=0; i<10; i++) {
@@ -45,5 +45,6 @@ public class Queue<E> {
 	System.out.println(q);
 	
     }
+    */
 
 }
