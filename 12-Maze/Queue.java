@@ -8,6 +8,13 @@ public class Queue {
 	last = first;
     }
 
+    public boolean empty() {
+	if(last == first) {
+	    return true;
+	}
+	return false;
+    }
+
     public void enqueue(Node n) {
 	last.setNext(n);
 	last = n;
@@ -21,7 +28,7 @@ public class Queue {
 
     public String toString() {
 	String s = "";
-	Node<E> yay = first;
+	Node yay = first;
 	while(yay!=last) {
 	    s = s + yay.getData() + ", ";
 	    yay = yay.getNext();

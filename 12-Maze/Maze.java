@@ -1,9 +1,9 @@
 import java.io.*;
 import java.util.*;
 
-public class Maze 
-{
+public class Maze {
     private Node[][] board;
+    private Queue Frontier;
     private int maxX;
     private int maxY;
 
@@ -68,15 +68,9 @@ public class Maze
 	Frontier.enqueue(board[x][y]);
 
 	while(!Frontier.empty()) {
+	    Node current;
 	    current = Frontier.dequeue();
 
-	    if (current.getData() == wall ||
-		current.getData() == me ||
-		current.getData() == visited ||
-		solved) {
-		return;
-	    }
-	    
 	    if (current.getData() == exit){
 		System.out.println(this);
 		solved = true;
@@ -91,9 +85,7 @@ public class Maze
 		current.setData(visited);
 	    }
 	    
-	}
-
-	
+	}	
     }
     
     public static void main(String[] args){
