@@ -1,33 +1,19 @@
 public class Node {
-    private char data;
-    private Node next = null;
+    private Node prev;
     private int X;
     private int Y;
 
-    public Node() {
-    }
-    public Node(char data) {
-	this.data = data;
-    }
-    public Node(char data, Node next) {
-	this.data = data;
-	this.next = next;
+    public Node(int X, int Y) {
+	this.X = X;
+	this.Y = Y;
     }
 
-    public char getData(){
-	return data;
+    public void setPrev(Node n) {
+	prev = n;
     }
 
-    public void setData(char data) {
-	this.data = data;
-    }
-
-    public Node getNext() {
-	return next;
-    }
-
-    public void setNext(Node n) {
-	next = n;
+    public Node getPrev() {
+	return prev;
     }
 
     public void setX(int X) {
