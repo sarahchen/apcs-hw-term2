@@ -5,6 +5,8 @@ public class Maze {
     private char[][] board;
     private int maxX;
     private int maxY;
+    private Queue Frontier;
+    //private StackFront Frontier;
 
     private char path='#';
     private char wall=' ';
@@ -19,8 +21,8 @@ public class Maze {
 	} catch (Exception e) {}
     }
     
-    public Maze() 
-    {
+    public Maze() {
+	Frontier = new Queue();
 	maxX=40;
 	maxY=20;
 	board = new char[maxX][maxY];
@@ -57,34 +59,16 @@ public class Maze {
 	return s;
     }
 
-    /*
-    public void solve(int x, int y){
-	Frontier.enqueue(board[x][y]);
-
-	while(!Frontier.empty()) {
-	    Node current;
-	    current = Frontier.dequeue();
-
-	    if (current.getData() == exit){
-		System.out.println(this);
-		solved = true;
-	    }
-	    
-	    Frontier.enqueue(board[current.getX()+1][current.getY()]);
-	    Frontier.enqueue(board[current.getX()-1][current.getY()]);
-	    Frontier.enqueue(board[current.getX()][current.getY()+1]);
-	    Frontier.enqueue(board[current.getX()][current.getY()-1]);
-
-	    if (!solved){
-		current.setData(visited);
-	    }
-	    
-	}	
+    public void addtoFront(int tx, int ty, Node current) {
+	if(board[tx][ty] == '#' || board[tx][ty] == '$') {
+	    tmp = new Node(tx, ty);
+	    tmp.setPrev(current); // For tracing back Nodes
+	    Frontier.enqueue(tmp);
+	}
     }
-    */
 
+    // BREADTH FIRST SEARCH
     public void bfs(int x, int y) {
-	Queue Frontier = new Queue();
 	Frontier.enqueue(new Node(x, y));
 
 	board[x][y] = 'x';
@@ -102,38 +86,12 @@ public class Maze {
 
 	    board[cx][cy] = 'z';
 	    Node tmp;
+
+	    addToFront(cx+1,cy,current);
+	    addToFront(cx-1,cy,current);
+	    addToFront(cx,cy+1,current);
+	    addToFront(cx,cy-1,current);
 	    
-	    tx = cx+1;
-	    ty = cy;
-	    if(board[tx][ty] == '#' || board[tx][ty] == '$') {
-		tmp = new Node(tx, ty);
-		tmp.setPrev(current); // For tracing back Nodes
-		Frontier.enqueue(tmp);
-	    }
-
-	    tx = cx-1;
-	    ty = cy;
-	    if(board[tx][ty] == '#' || board[tx][ty] == '$') {
-		tmp = new Node(tx, ty);
-		tmp.setPrev(current);
-		Frontier.enqueue(tmp);
-	    }
-
-	    tx = cx;
-	    ty = cy+1;
-	    if(board[tx][ty] == '#' || board[tx][ty] == '$') {
-		tmp = new Node(tx, ty);
-		tmp.setPrev(current);
-		Frontier.enqueue(tmp);
-	    }
-
-	    tx = cx;
-	    ty = cy-1;
-	    if(board[tx][ty] == '#' || board[tx][ty] == '$') {
-		tmp = new Node(tx, ty);
-		tmp.setPrev(current);
-		Frontier.enqueue(tmp);
-	    }
 
 	    delay(50);
 	    System.out.println(this);
@@ -146,6 +104,19 @@ public class Maze {
 	    System.out.println(this);
 	}
     }
+
+    /*
+
+      BEST FIRST SEARCH
+      Adds Nodes to the Frontier based on prioroty. (Priority List)
+      
+      Maze Heuristics:
+      1. Distance formula (Euclidean)
+      2. Manhattan (Taxi-Cab) distance
+
+      Priority of Node n = cost to get to Node n + established distance to goal
+
+    */
     
     public static void main(String[] args){
 	Maze m = new Maze();
