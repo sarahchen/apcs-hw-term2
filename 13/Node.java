@@ -13,6 +13,12 @@ public class Node {
     public Node(int prior) {
 	this.prior = prior;
     }
+    public Node(int X, int Y, int prior) {
+	this.X = X;
+	this.Y = Y;
+	this.prior = prior;
+    }
+    
 
     public void setPrior(int prior) {
 	this.prior = prior;

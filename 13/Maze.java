@@ -6,7 +6,8 @@ public class Maze {
     private int maxX;
     private int maxY;
     private Queue Frontier;
-    //private StackFront Frontier;
+    // private StackFront Frontier;
+    // private PriorityQueue Frontier;
 
     private char path='#';
     private char wall=' ';
@@ -22,7 +23,7 @@ public class Maze {
     }
     
     public Maze() {
-	Frontier = new Queue();
+	Frontier = new PriorityQueue();
 	maxX=40;
 	maxY=20;
 	board = new char[maxX][maxY];
@@ -119,8 +120,30 @@ public class Maze {
 
     */
 
-    public void bestFirstSearch() {
+    // DISTANCE FORMULA
+    public double getDistance(Node start, Node end) {
+	startX = start.getX();
+	startY = start.getY();
+	endX = end.getX();
+	endY = end.getY();
+
+        int Xsquared = (startX - endX) * (startX - endX);
+	int Ysquared = (startY - endY) * (startY - endY);
+
+	return Math.sqrt(Xsquared + Ysquared);
 	
+    }
+
+    public double getPriority(Node start, Node target, Node end) {
+	return getDistance(start, target) + getDistance(target, end);
+    }
+    
+    public void bestFirstSearch(int x, int y, int gx, int gy) {
+	Node current = null;
+	Node goal = new Node(gx, gy);
+	Frontier.enqueue(new Node(x, y, getPriority(this, this, goal)));
+	
+        
     }
     
     public static void main(String[] args){

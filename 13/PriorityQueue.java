@@ -1,0 +1,22 @@
+import java.util.*;
+
+public class PriorityQueue extends Queue {
+
+    public void enqueue(Node n) {
+	int p = n.getPrior();
+	Node tmp;
+	int index = 0;
+	for(int i=0;i < l.size(); i++) {
+	    tmp = l.get(i);
+	    if(tmp.getPrior() < p) {
+		index = i;
+	    }
+	    else {
+		l.add(index, n);
+		break;
+	    }
+	}
+    }
+
+    
+}
