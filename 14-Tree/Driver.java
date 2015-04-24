@@ -2,7 +2,7 @@
 public class Driver {
     
     public static void main(String[] args) {
-	BinaryTree tree = new BinaryTree(new Node(20));
+	BinaryTree tree = new BinaryTree(new Node(20, 0));
 
 	tree.insert(tree.getRoot(), 25);
 	tree.insert(tree.getRoot(), 5);
