@@ -2,29 +2,39 @@
 public class BinaryTree {
     private Node root;
 
-    public BinaryTree() {
-	
-    }
-    
-    public Node search(Node T, int i) {
-	Node T2 = new Node();
-	while(T!=null) {
-	    int c = T.getData().compareTo(i);
-	    if(c > 0) {
-		T2 = T;
-		T = T.getRight();
-	    }else if(c < 0) {
-		T2 = T;
-		T = T.getLeft();
-	    } else {
-		return T2;
-	    }
-	}
-	return null;
+    public BinaryTree(Node root) {
+	this.root = root;
     }
 
-    public void insert(Node n) {
-	
+    public Node getRoot() {
+	return root;
+    }
+
+    public Node search(Node T, int i) {
+	Node T2 = null;
+	int c;
+	while(T!=null) {
+	    c = T.getData();
+	    T2 = T;
+	    if(c < i) {
+		T = T.getRight();
+	    }else if(c > i) {
+		T = T.getLeft();
+	    } else {
+	        break;
+	    }
+	}
+	return T2;
+    }
+
+    public void insert(Node T, int i) {
+	Node pointer = search(T, i);
+	int d = pointer.getData();
+	if(d < i) {
+	    pointer.setRight(new Node(i));
+	} else if(d > i) {
+	    pointer.setLeft(new Node(i));
+	}
     }
 
 }
