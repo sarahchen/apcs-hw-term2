@@ -30,18 +30,27 @@ public class BinaryTree {
     public void insert(Node T, int i) {
 	Node pointer = search(T, i);
 	int d = pointer.getData();
-	int l = pointer.getLevel();
 	if(d < i) {
-	    pointer.setRight(new Node(i, l+1));
+	    pointer.setRight(new Node(i));
 	} else if(d > i) {
-	    pointer.setLeft(new Node(i, l+1));
+	    pointer.setLeft(new Node(i));
 	}
     }
 
-    /*
-    public String toString() {
+    public String t(Node cake) {
 	String s = "";
+        if(cake == null) {
+	    return s;
+	}
+	s = cake.getData() + t(cake.getLeft()) + t(cake.getRight());
+	return s;
     }
-    */
+
+   
+    public String toString() {
+        String s = "";
+	s = t(root);
+	return s;
+    }
 
 }
