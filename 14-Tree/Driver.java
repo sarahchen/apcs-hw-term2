@@ -11,7 +11,7 @@ public class Driver {
 	tree.insert(tree.getRoot(), 75);
 	tree.insert(tree.getRoot(), 34);
 
-	System.out.println();
+	System.out.println(tree.t(tree.getRoot()));
 	
     }
     

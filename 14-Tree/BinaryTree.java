@@ -40,9 +40,10 @@ public class BinaryTree {
     public String t(Node cake) {
 	String s = "";
         if(cake == null) {
-	    return s;
+	    return "";
+	} else {
+	    s = s + t(cake.getLeft()) + cake.getData() + t(cake.getRight());
 	}
-	s = cake.getData() + t(cake.getLeft()) + t(cake.getRight());
 	return s;
     }
 
