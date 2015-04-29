@@ -38,13 +38,11 @@ public class BinaryTree {
     }
 
     public String t(Node cake) {
-	String s = "";
         if(cake == null) {
 	    return "";
 	} else {
-	    s = s + t(cake.getLeft()) + cake.getData() + t(cake.getRight());
+	    return  t(cake.getLeft()) + cake.getData()+", " + t(cake.getRight());
 	}
-	return s;
     }
 
    
