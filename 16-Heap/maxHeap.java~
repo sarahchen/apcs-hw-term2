@@ -1,0 +1,14 @@
+
+public class maxHeap {
+    private Node[] heap;
+
+    public maxHeap(int l) {
+	Random rng = new Random();
+	
+	heap = new Node[l]();
+	for(int i=0; i < l; i++) {
+	    Node[i] = rng.nextInt(51);
+	}
+	//ORGANIZE
+    }
+}
